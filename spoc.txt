@@ -1,0 +1,29 @@
+Team J_FSD_5
+Primary SPOC - Amulya Bendi
+Secondary SPOC - Shubham Kapoor
+
+tdd => 
+usestory =>
+testcase => 
+
+usecase => done
+class diagram => done
+
+
+We are using agile Methodology
+Following scrum master ->
+  ==> Talk about what to complete next
+  ==> What we did today
+  ==> 
+
+// login, register, view tickets > customer, admin, emp , 
+   asssign ticket> admin, create tickets
+
+ amuya , soumya  => Customer User story > 
+
+ Anirundh, shreya => Staff User Case > sendMessage, login, assignWorkTOstaff 
+
+ shubham, uma => admin User Case > 
+
+@shubham // augular=> api create 
+#tags // agular
