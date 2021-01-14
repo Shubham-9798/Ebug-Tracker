@@ -16,7 +16,7 @@ public class Status_Table {
 	
 	private String type;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "status")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "statusTable")
 	private List<Ticket_Table> tickets = new ArrayList<>();
 
 	public Status_Table() {

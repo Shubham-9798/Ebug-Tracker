@@ -17,7 +17,7 @@ public class CriticalLevel_Table {
 	
 	private String type;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "critical")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "criticalLevel")
 	private List<Ticket_Table> tickets = new ArrayList<>();
 
 	public Long getId() {

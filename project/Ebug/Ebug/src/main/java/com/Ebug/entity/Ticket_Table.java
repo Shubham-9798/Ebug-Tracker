@@ -140,10 +140,14 @@ public class Ticket_Table {
 	public void setCriticalLevel(CriticalLevel_Table criticalLevel) {
 		this.criticalLevel = criticalLevel;
 	}
+
+	@Override
+	public String toString() {
+		return "Ticket_Table [id=" + id + ", title=" + title + ", comments=" + comments + ", solution=" + solution
+				+ ", fileName=" + fileName + ", isUpdatedByAdmin=" + isUpdatedByAdmin + ", isVerifiedByAdmin="
+				+ isVerifiedByAdmin + ", isResolved=" + isResolved + "]";
+	}
 	 
 	 
-	 
-	 
-	
-	
+	 	
 }
