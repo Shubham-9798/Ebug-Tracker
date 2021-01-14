@@ -39,6 +39,10 @@ public class Ticket_Table {
 	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "critical_id")
 	 private CriticalLevel_Table criticalLevel;
+	 
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name = "project_id")
+	 private Project_Table projectTable;
 
 	public Ticket_Table() {
 		super();

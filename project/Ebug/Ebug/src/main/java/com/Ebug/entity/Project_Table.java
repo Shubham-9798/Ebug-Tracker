@@ -1,7 +1,12 @@
 package com.Ebug.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Project_Table {
@@ -19,15 +24,8 @@ private String frontendTechno;
 
 private String backendTechno;
 
-private String projectManager;
-
-public Project_Table() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-
 public Project_Table(Long id, String projectName, String projectDescription, String projectId, String frontendTechno,
-		String backendTechno, String projectManager) {
+		String backendTechno, String projectManager, List<Ticket_Table> tickets) {
 	super();
 	this.id = id;
 	this.projectName = projectName;
@@ -36,6 +34,17 @@ public Project_Table(Long id, String projectName, String projectDescription, Str
 	this.frontendTechno = frontendTechno;
 	this.backendTechno = backendTechno;
 	this.projectManager = projectManager;
+	this.tickets = tickets;
+}
+
+private String projectManager;
+
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectTable")
+private List<Ticket_Table> tickets = new ArrayList<>();
+
+public Project_Table() {
+	super();
+	// TODO Auto-generated constructor stub
 }
 
 public Long getId() {
@@ -93,6 +102,15 @@ public String getProjectManager() {
 public void setProjectManager(String projectManager) {
 	this.projectManager = projectManager;
 }
+
+public List<Ticket_Table> getTickets() {
+	return tickets;
+}
+
+public void setTickets(List<Ticket_Table> tickets) {
+	this.tickets = tickets;
+}
+
 
 
 
