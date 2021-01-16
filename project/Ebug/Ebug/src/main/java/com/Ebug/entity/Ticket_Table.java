@@ -1,5 +1,7 @@
 package com.Ebug.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Ticket_Table {
 	
 	@Id
@@ -30,40 +38,29 @@ public class Ticket_Table {
 	
 	private Boolean isResolved;
 	
+	@Column
+	private long custId;
+
 	//Bidirectional MApping, here fk is generate with status_id field
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id")
+	 @ManyToOne //(fetch = FetchType.LAZY)
+     @JoinColumn(name = "status_id")
+//	 @JsonBackReference(value="statusTable")
 	 private Status_Table statusTable;
 	 
 	// Bidirectional Mapping, here fk is generate with critical_id field
-	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name = "critical_id")
+	 @ManyToOne
+//   @JoinColumn(name = "critical_id", referencedColumnName = "id")
+//	 @JsonBackReference(value="criticalLevel")
 	 private CriticalLevel_Table criticalLevel;
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name = "project_id")
+	 @JoinColumn(name = "project_id", referencedColumnName = "id")
+	 @JsonBackReference(value="projectTable")
 	 private Project_Table projectTable;
-
-	public Ticket_Table() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Ticket_Table(Long id, String title, String comments, String solution, String fileName,
-			Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved, Status_Table statusTable,
-			CriticalLevel_Table criticalLevel) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.comments = comments;
-		this.solution = solution;
-		this.fileName = fileName;
-		this.isUpdatedByAdmin = isUpdatedByAdmin;
-		this.isVerifiedByAdmin = isVerifiedByAdmin;
-		this.isResolved = isResolved;
-		this.statusTable = statusTable;
-		this.criticalLevel = criticalLevel;
-	}
+	 
+	 @ManyToOne 
+     @JoinColumn(name = "projectDeatil_id")
+	 private Project_Table projectDeatil;
 
 	public Long getId() {
 		return id;
@@ -129,6 +126,14 @@ public class Ticket_Table {
 		this.isResolved = isResolved;
 	}
 
+	public long getCustId() {
+		return custId;
+	}
+
+	public void setCustId(long custId) {
+		this.custId = custId;
+	}
+
 	public Status_Table getStatusTable() {
 		return statusTable;
 	}
@@ -145,12 +150,58 @@ public class Ticket_Table {
 		this.criticalLevel = criticalLevel;
 	}
 
-	@Override
-	public String toString() {
-		return "Ticket_Table [id=" + id + ", title=" + title + ", comments=" + comments + ", solution=" + solution
-				+ ", fileName=" + fileName + ", isUpdatedByAdmin=" + isUpdatedByAdmin + ", isVerifiedByAdmin="
-				+ isVerifiedByAdmin + ", isResolved=" + isResolved + "]";
+	public Project_Table getProjectTable() {
+		return projectTable;
 	}
+
+	public void setProjectTable(Project_Table projectTable) {
+		this.projectTable = projectTable;
+	}
+
+
+
+	public Project_Table getProjectDeatil() {
+		return projectDeatil;
+	}
+
+	public void setProjectDeatil(Project_Table projectDeatil) {
+		this.projectDeatil = projectDeatil;
+	}
+
+	public Ticket_Table() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Ticket_Table(Long id, String title, String comments, String solution, String fileName,
+			Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved, long custId,
+			Status_Table statusTable, CriticalLevel_Table criticalLevel, Project_Table projectTable,
+			Project_Table projectDeatil) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.comments = comments;
+		this.solution = solution;
+		this.fileName = fileName;
+		this.isUpdatedByAdmin = isUpdatedByAdmin;
+		this.isVerifiedByAdmin = isVerifiedByAdmin;
+		this.isResolved = isResolved;
+		this.custId = custId;
+		this.statusTable = statusTable;
+		this.criticalLevel = criticalLevel;
+		this.projectTable = projectTable;
+		this.projectDeatil = projectDeatil;
+	}
+	
+	 
+
+	
+
+
+	
+
+
+	
 	 
 	 
 	 	

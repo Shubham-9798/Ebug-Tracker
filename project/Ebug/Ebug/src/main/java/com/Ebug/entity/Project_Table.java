@@ -5,13 +5,20 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Project_Table {
 	
-@Id
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 private Long id;
 
 private String projectName;
@@ -40,7 +47,9 @@ public Project_Table(Long id, String projectName, String projectDescription, Str
 private String projectManager;
 
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectTable")
-private List<Ticket_Table> tickets = new ArrayList<>();
+//@JsonIgnoreProperties("projectTable")
+@JsonManagedReference(value="projectTable")
+private List<Ticket_Table> tickets ;
 
 public Project_Table() {
 	super();
