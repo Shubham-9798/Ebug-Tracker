@@ -12,4 +12,10 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 
 	@Query(value = "Select * from TICKET_TABLE a where a.status_id=:id",  nativeQuery = true)
 	public List<Ticket_Table> FindTicketByStatusId( @Param("id") Long id);
+	
+	@Query(value = "Select * from TICKET_TABLE a where a.critical_id=:id",  nativeQuery = true)
+	public List<Ticket_Table> FindTicketByCriticalLevelId( @Param("id") Long id);
+	
+	@Query(value = "Select * from TICKET_TABLE a where a.project_id=:id",  nativeQuery = true)
+	public List<Ticket_Table> FindTicketByProjectId( @Param("id") Long id);
 }

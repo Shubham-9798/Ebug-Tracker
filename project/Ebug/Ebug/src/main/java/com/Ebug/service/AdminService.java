@@ -35,7 +35,7 @@ public class AdminService implements IAdminService{
 	public List<Ticket_Table> getAllTickets() {
 		// TODO Auto-generated method stub
 		List<Ticket_Table> ticketList = ticketRepository.findAll();
-		System.out.println(ticketList.get(0).getStatusTable().toString());
+
 		if(ticketList.size() == 0) {
 			return null;
 		} else {
@@ -98,8 +98,9 @@ public class AdminService implements IAdminService{
 	}
 
 	@Override
-	public Ticket_Table updateTicket(Ticket_Table ticket) {
+	public Ticket_Table updateTicketByAdmin(Ticket_Table ticket) {
 		try {
+			ticket.setIsUpdatedByAdmin(true);
 			return ticketRepository.save(ticket);
 		}catch(Exception ex) {
 			System.out.println(ex);
@@ -147,6 +148,95 @@ public class AdminService implements IAdminService{
 		return null;
 	}
 
+	@Override
+	public List<Ticket_Table> getTicketByCriticalLevelId(Long id) {
+		// TODO Auto-generated method stub
+		try {
+			List<Ticket_Table> ticketList = ticketRepository.FindTicketByCriticalLevelId(id);
+			if(ticketList.size() == 0) {
+				return null;
+			} else {
+				return ticketList;
+			}
+		}catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
+	}
+
+	@Override
+	public List<Ticket_Table> getTicketByProjectId(Long id) {
+		// TODO Auto-generated method stub
+		try {
+			List<Ticket_Table> ticketList = ticketRepository.FindTicketByProjectId(id);
+			if(ticketList.size() == 0) {
+				return null;
+			} else {
+				return ticketList;
+			}
+		}catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
+	}
+
+	@Override
+	public Ticket_Table assignTicketToEmployeeByAdmin(Long ticketId, Long employeeId) {
+		// TODO Auto-generated method stub
+		
+		try {
+			Optional<Ticket_Table> data = ticketRepository.findById(ticketId);
+			if(data.isPresent())
+			{
+				Ticket_Table ticket = data.get();
+				ticket.setAssignedToEmployee(employeeId);
+				return ticketRepository.save(ticket);
+			}
+			else {
+				return null;
+			}
+		} catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
+		
+	}
+
+	@Override
+	public Ticket_Table getTicketById(Long id) {
+		// TODO Auto-generated method stub 
+		try {
+			Optional<Ticket_Table> data = ticketRepository.findById(id);
+			if(data.isPresent())
+			return data.get();
+			else {
+				return null;
+			}
+		}catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
+		
+	}
+
+	@Override
+	public Ticket_Table updateTicketStatusById(Long id) {
+		// TODO Auto-generated method stub 
+		try {
+			Optional<Ticket_Table> data = ticketRepository.findById(id);
+			if(data.isPresent()) {
+			data.get().setStatusTable(null);
+			return data.get();
+			}
+			else {
+				return null;
+			}
+		}catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
+		
+	}
 
 	
 	 

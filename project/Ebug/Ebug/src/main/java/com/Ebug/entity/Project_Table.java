@@ -31,25 +31,11 @@ private String frontendTechno;
 
 private String backendTechno;
 
-public Project_Table(Long id, String projectName, String projectDescription, String projectId, String frontendTechno,
-		String backendTechno, String projectManager, List<Ticket_Table> tickets) {
-	super();
-	this.id = id;
-	this.projectName = projectName;
-	this.projectDescription = projectDescription;
-	this.projectId = projectId;
-	this.frontendTechno = frontendTechno;
-	this.backendTechno = backendTechno;
-	this.projectManager = projectManager;
-	this.tickets = tickets;
-}
+private String createdByAdminId;
+
 
 private String projectManager;
 
-@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectTable")
-//@JsonIgnoreProperties("projectTable")
-@JsonManagedReference(value="projectTable")
-private List<Ticket_Table> tickets ;
 
 public Project_Table() {
 	super();
@@ -112,18 +98,26 @@ public void setProjectManager(String projectManager) {
 	this.projectManager = projectManager;
 }
 
-public List<Ticket_Table> getTickets() {
-	return tickets;
+public Project_Table(Long id, String projectName, String projectDescription, String projectId, String frontendTechno,
+		String backendTechno, String createdByAdminId, String projectManager) {
+	super();
+	this.id = id;
+	this.projectName = projectName;
+	this.projectDescription = projectDescription;
+	this.projectId = projectId;
+	this.frontendTechno = frontendTechno;
+	this.backendTechno = backendTechno;
+	this.createdByAdminId = createdByAdminId;
+	this.projectManager = projectManager;
 }
 
-public void setTickets(List<Ticket_Table> tickets) {
-	this.tickets = tickets;
+public String getCreatedByAdminId() {
+	return createdByAdminId;
 }
 
-
-
-
-
+public void setCreatedByAdminId(String createdByAdminId) {
+	this.createdByAdminId = createdByAdminId;
+}
 
 
 }

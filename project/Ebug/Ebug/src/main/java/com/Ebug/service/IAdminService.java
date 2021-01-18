@@ -10,8 +10,9 @@ import com.Ebug.entity.Ticket_Table;
 public interface IAdminService {
 
 	 List<Ticket_Table> getAllTickets();
+	 Ticket_Table getTicketById(Long id);
 	 Ticket_Table createTicket(Ticket_Table ticket);
-	 Ticket_Table updateTicket(Ticket_Table ticket);
+	 Ticket_Table updateTicketByAdmin(Ticket_Table ticket);
      List<Status_Table> getAllStatus() ;
      Status_Table addStatus(Status_Table status);
      
@@ -22,6 +23,12 @@ public interface IAdminService {
      List<Project_Table> getAllProject();
      Project_Table getProjectByID(Long id);
 	List<Ticket_Table> getTicketByStatusId(Long id);
+	List<Ticket_Table> getTicketByCriticalLevelId(Long id);
+	List<Ticket_Table> getTicketByProjectId(Long id);
+	
+	 Ticket_Table assignTicketToEmployeeByAdmin(Long ticketId, Long employeeId);
+	 
+	 Ticket_Table updateTicketStatusById(Long id);
      
      
      

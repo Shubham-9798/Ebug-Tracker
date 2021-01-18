@@ -38,6 +38,8 @@ public class Ticket_Table {
 	
 	private Boolean isResolved;
 	
+	private Long assignedToEmployee;
+	
 	@Column
 	private long custId;
 
@@ -49,18 +51,15 @@ public class Ticket_Table {
 	 
 	// Bidirectional Mapping, here fk is generate with critical_id field
 	 @ManyToOne
-//   @JoinColumn(name = "critical_id", referencedColumnName = "id")
+   @JoinColumn(name = "critical_id")
 //	 @JsonBackReference(value="criticalLevel")
 	 private CriticalLevel_Table criticalLevel;
 	 
-	 @ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(name = "project_id", referencedColumnName = "id")
-	 @JsonBackReference(value="projectTable")
+	 @ManyToOne
+	 @JoinColumn(name = "project_id")
+//	 @JsonBackReference(value="projectTable")
 	 private Project_Table projectTable;
 	 
-	 @ManyToOne 
-     @JoinColumn(name = "projectDeatil_id")
-	 private Project_Table projectDeatil;
 
 	public Long getId() {
 		return id;
@@ -158,25 +157,22 @@ public class Ticket_Table {
 		this.projectTable = projectTable;
 	}
 
-
-
-	public Project_Table getProjectDeatil() {
-		return projectDeatil;
-	}
-
-	public void setProjectDeatil(Project_Table projectDeatil) {
-		this.projectDeatil = projectDeatil;
-	}
-
 	public Ticket_Table() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public Long getAssignedToEmployee() {
+		return assignedToEmployee;
+	}
+
+	public void setAssignedToEmployee(Long assignedToEmployee) {
+		this.assignedToEmployee = assignedToEmployee;
+	}
+
 	public Ticket_Table(Long id, String title, String comments, String solution, String fileName,
-			Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved, long custId,
-			Status_Table statusTable, CriticalLevel_Table criticalLevel, Project_Table projectTable,
-			Project_Table projectDeatil) {
+			Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved, Long assignedToEmployee,
+			long custId, Status_Table statusTable, CriticalLevel_Table criticalLevel, Project_Table projectTable) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -186,18 +182,14 @@ public class Ticket_Table {
 		this.isUpdatedByAdmin = isUpdatedByAdmin;
 		this.isVerifiedByAdmin = isVerifiedByAdmin;
 		this.isResolved = isResolved;
+		this.assignedToEmployee = assignedToEmployee;
 		this.custId = custId;
 		this.statusTable = statusTable;
 		this.criticalLevel = criticalLevel;
 		this.projectTable = projectTable;
-		this.projectDeatil = projectDeatil;
 	}
-	
-	 
 
 	
-
-
 	
 
 

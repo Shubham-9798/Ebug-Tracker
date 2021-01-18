@@ -28,9 +28,24 @@ public class AdminController {
 	    return new ResponseEntity<List<Ticket_Table>>(adminService.getAllTickets(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/ticket/{id}")
-	ResponseEntity<List<Ticket_Table>> getAllTickets1(@PathVariable("id") Long id) {
+	@GetMapping("/tickets/{ticketId}")
+	ResponseEntity<Ticket_Table> getTicketById(@PathVariable("ticketId") Long id) {
+	    return new ResponseEntity<Ticket_Table>(adminService.getTicketById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticketbystatusid/{id}")
+	ResponseEntity<List<Ticket_Table>> getTicketsByStatusId(@PathVariable("id") Long id) {
 	    return new ResponseEntity<List<Ticket_Table>>(adminService.getTicketByStatusId(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticketbycriticalid/{id}")
+	ResponseEntity<List<Ticket_Table>> getTicketsByCriticalId(@PathVariable("id") Long id) {
+	    return new ResponseEntity<List<Ticket_Table>>(adminService.getTicketByCriticalLevelId(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticketbyprojectid/{id}")
+	ResponseEntity<List<Ticket_Table>> getTicketsByProjectId(@PathVariable("id") Long id) {
+	    return new ResponseEntity<List<Ticket_Table>>(adminService.getTicketByProjectId(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/getstatus")
@@ -45,9 +60,18 @@ public class AdminController {
 	}
 	
 	@PostMapping("/updateticket")
-	ResponseEntity<Ticket_Table> updateTickets(@RequestBody Ticket_Table ticket) {
-		System.out.println(ticket.toString());
-	    return new ResponseEntity<Ticket_Table>(adminService.createTicket(ticket), HttpStatus.OK);
+	ResponseEntity<Ticket_Table> updateTicketsByAdmin(@RequestBody Ticket_Table ticket) {
+
+	    return new ResponseEntity<Ticket_Table>(adminService.updateTicketByAdmin(ticket), HttpStatus.OK);
+	}
+	
+	@PostMapping("/assignticket/{ticketID}")
+	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @RequestBody Long employeeId) {
+	    System.out.println(ticketId);
+	    System.out.println(employeeId);
+	    
+//		return null;
+		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(ticketId, employeeId), HttpStatus.OK);
 	}
 	
 	@PostMapping("/addstatus")
@@ -80,4 +104,6 @@ public class AdminController {
 	ResponseEntity<Project_Table> getProjectByID(@PathVariable("id") Long id) {
 	    return new ResponseEntity<Project_Table>(adminService.getProjectByID(id), HttpStatus.OK);
 	}
+	
+	
 }
