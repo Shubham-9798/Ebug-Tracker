@@ -9,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Ebug.dao.CriticalLevel_Repository;
+import com.Ebug.dao.Employee_Repositroy;
 import com.Ebug.dao.Project_Repository;
 import com.Ebug.dao.Status_Repository;
 import com.Ebug.dao.Ticket_Repository;
 import com.Ebug.entity.CriticalLevel_Table;
+import com.Ebug.entity.Customer_Table;
+import com.Ebug.entity.Employee_Table;
 import com.Ebug.entity.Project_Table;
 import com.Ebug.entity.Status_Table;
 import com.Ebug.entity.Ticket_Table;
+import com.Ebug.exception.EbugException;
 
 @Service
 @Transactional
@@ -29,6 +33,8 @@ public class AdminService implements IAdminService{
 	private CriticalLevel_Repository criticalRepository;
 	@Autowired
 	private Project_Repository projectRepository;
+	@Autowired
+	private Employee_Repositroy employeeRepository;
 	
 
 	@Override
@@ -60,17 +66,7 @@ public class AdminService implements IAdminService{
 
 	}
 
-	@Override
-	public Ticket_Table createTicket(Ticket_Table ticket) {
-		// TODO Auto-generated method stub
-		try {
-			return ticketRepository.save(ticket);
-		}catch(Exception ex) {
-			System.out.println(ex);
-			return null;
-		}
-		
-	}
+ 
 	
 	
 	@Override
@@ -85,17 +81,6 @@ public class AdminService implements IAdminService{
 		
 	}
 
-	@Override
-	public Status_Table addStatus(Status_Table status) {
-		// TODO Auto-generated method stub
-		return statusRepository.save(status);
-	}
-	
-	@Override
-	public CriticalLevel_Table addCriticalLevel(CriticalLevel_Table critical) {
-		// TODO Auto-generated method stub
-		return criticalRepository.save(critical);
-	}
 
 	@Override
 	public Ticket_Table updateTicketByAdmin(Ticket_Table ticket) {
@@ -238,7 +223,21 @@ public class AdminService implements IAdminService{
 		
 	}
 
-	
+	@Override
+	public Employee_Table registerEmployee(Employee_Table employee) {
+		try {
+			List<Employee_Table> customersList = employeeRepository.findAll();
+			for(Employee_Table isExists : customersList) {
+				if(isExists.getEmailId().equalsIgnoreCase(employee.getEmailId())) {
+					throw new EbugException("Customer already Exists");
+				}
+			}
+			return employeeRepository.save(employee);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return null;
+		}
+	}
 	 
 	
 }

@@ -1,6 +1,8 @@
 package com.Ebug.entity;
 
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,8 +28,26 @@ public class Customer_Table {
 	private String password;
 	@Column
 	private String confirmPassword;
-
+	private String adharCard;
 	
+	private String DOB;
+	
+
+	public String getAdharCard() {
+		return adharCard;
+	}
+
+	public void setAdharCard(String adharCard) {
+		this.adharCard = adharCard;
+	}
+
+	public String getDOB() {
+		return DOB;
+	}
+
+	public void setDOB(String dOB) {
+		DOB = dOB;
+	}
 
 	public long getCustId() {
 		return custId;
@@ -91,7 +111,7 @@ public class Customer_Table {
 	}
 
 	public Customer_Table(long custId, String firstName, String lastName, String emailId, long mobileNo,
-			String password, String confirmPassword) {
+			String password, String confirmPassword, String adharCard, String dOB) {
 		super();
 		this.custId = custId;
 		this.firstName = firstName;
@@ -100,7 +120,11 @@ public class Customer_Table {
 		this.mobileNo = mobileNo;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
+		this.adharCard = adharCard;
+		DOB = dOB;
 	}
+
+
 
 
 

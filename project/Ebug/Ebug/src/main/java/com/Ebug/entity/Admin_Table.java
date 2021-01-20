@@ -1,5 +1,7 @@
 package com.Ebug.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +26,25 @@ public class Admin_Table {
 	private String password;
 	@Column
 	private String role;
+	
+	private String adharCard;
+	
+	private String DOB;
+	
+	
+	
+	public String getAdharCard() {
+		return adharCard;
+	}
+	public void setAdharCard(String adharCard) {
+		this.adharCard = adharCard;
+	}
+	public String getDOB() {
+		return DOB;
+	}
+	public void setDOB(String dOB) {
+		DOB = dOB;
+	}
 	public long getId() {
 		return id;
 	}
@@ -66,8 +87,10 @@ public class Admin_Table {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	
 	public Admin_Table(long id, String firstName, String lastName, String emailId, long mobileNo, String password,
-			String role) {
+			String role, String adharCard, String dOB) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -76,6 +99,8 @@ public class Admin_Table {
 		this.mobileNo = mobileNo;
 		this.password = password;
 		this.role = role;
+		this.adharCard = adharCard;
+		DOB = dOB;
 	}
 	public Admin_Table() {
 		super();

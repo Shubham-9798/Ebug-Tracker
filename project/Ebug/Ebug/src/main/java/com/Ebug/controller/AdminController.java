@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.Ebug.entity.CriticalLevel_Table;
+import com.Ebug.entity.Customer_Table;
+import com.Ebug.entity.Employee_Table;
 import com.Ebug.entity.Project_Table;
 import com.Ebug.entity.Status_Table;
 import com.Ebug.entity.Ticket_Table;
+import com.Ebug.exception.UserAlreadyRegisterd;
 import com.Ebug.service.IAdminService;
 
 @Controller
@@ -22,6 +25,16 @@ public class AdminController {
 	
 	@Autowired
 	private IAdminService adminService;
+	
+	@PostMapping(path = "/registerEmployee")
+	ResponseEntity<Employee_Table> loginEmployee(@RequestBody Employee_Table employee) {
+		Employee_Table response = adminService.registerEmployee(employee);
+		if(response == null) {
+
+			throw new UserAlreadyRegisterd("400", "User Alredy Register");			
+		}
+		 return new ResponseEntity<Employee_Table>(response, HttpStatus.OK);
+	}
 	
 	@GetMapping("/tickets")
 	ResponseEntity<List<Ticket_Table>> getAllTickets() {
@@ -53,11 +66,6 @@ public class AdminController {
 	    return new ResponseEntity<List<Status_Table>>(adminService.getAllStatus(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/createticket")
-	ResponseEntity<Ticket_Table> createTickets(@RequestBody Ticket_Table ticket) {
-		System.out.println(ticket.toString());
-	    return new ResponseEntity<Ticket_Table>(adminService.createTicket(ticket), HttpStatus.OK);
-	}
 	
 	@PostMapping("/updateticket")
 	ResponseEntity<Ticket_Table> updateTicketsByAdmin(@RequestBody Ticket_Table ticket) {
@@ -74,15 +82,6 @@ public class AdminController {
 		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(ticketId, employeeId), HttpStatus.OK);
 	}
 	
-	@PostMapping("/addstatus")
-	ResponseEntity<Status_Table> createTickets(@RequestBody Status_Table status) {
-	    return new ResponseEntity<Status_Table>(adminService.addStatus(status), HttpStatus.OK);
-	}
-	
-	@PostMapping("/addcritical")
-	ResponseEntity<CriticalLevel_Table> createTickets(@RequestBody CriticalLevel_Table critical) {
-	    return new ResponseEntity<CriticalLevel_Table>(adminService.addCriticalLevel(critical), HttpStatus.OK);
-	}
 	
 	@GetMapping("/getcritical")
 	ResponseEntity<List<CriticalLevel_Table>> getAllCritical() {

@@ -1,6 +1,7 @@
 package com.Ebug.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,6 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 	
 	@Query(value = "Select * from TICKET_TABLE a where a.project_id=:id",  nativeQuery = true)
 	public List<Ticket_Table> FindTicketByProjectId( @Param("id") Long id);
+	
+	Optional<Ticket_Table> findTicketById(Long id);
 }
