@@ -1,10 +1,14 @@
 package com.Ebug.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -45,6 +49,16 @@ public class CustomerController {
 	ResponseEntity<Ticket_Table> createTickets(@RequestBody Ticket_Table ticket) {
 		System.out.println(ticket.toString());
 	    return new ResponseEntity<Ticket_Table>(customerService.createTicket(ticket), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticketbystatusidbycus/{id}/{employeeId}")
+	ResponseEntity<List<Ticket_Table>> getTicketsByStatusIdByCus(@PathVariable("id") Long id, @PathVariable("employeeId") Long employeeId) {
+	    return new ResponseEntity<List<Ticket_Table>>(customerService.getTicketByStatusByCus(id,employeeId), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticketbycriticalidbycus/{id}/{employeeId}")
+	ResponseEntity<List<Ticket_Table>> getTicketsByCriticalIdByCus(@PathVariable("id") Long id,@PathVariable("employeeId") Long employeeId) {
+	    return new ResponseEntity<List<Ticket_Table>>(customerService.getTicketByCriticalLevelIdByCus(id,employeeId), HttpStatus.OK);
 	}
 	
     @ExceptionHandler({ UserAlreadyRegisterd.class})

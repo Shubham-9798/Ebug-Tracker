@@ -13,6 +13,7 @@ import com.Ebug.dao.Ticket_Repository;
 import com.Ebug.entity.Customer_Table;
 import com.Ebug.entity.Ticket_Table;
 import com.Ebug.exception.EbugException;
+import com.Ebug.exception.TicketNotFoundException;
 
 @Service
 @Transactional
@@ -71,4 +72,28 @@ public class CustomerService implements ICustomerService {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Ticket_Table> getTicketByCriticalLevelIdByCus(Long criticalId,Long employeeId) 
+	{
+			List<Ticket_Table> ticketList = ticketRepository.FindTicketByCriticalLevelIdByEmp(criticalId,employeeId);
+			if(ticketList.size() == 0) {
+				throw new TicketNotFoundException("There is no ticket available for the critical level id: "+criticalId, "200");
+			} else {
+				return ticketList;
+			}
+	}
+	
+	@Override
+	public List<Ticket_Table> getTicketByStatusByCus(Long statusId,Long employeeId)
+	{
+			List<Ticket_Table> ticketList = ticketRepository.FindTicketByStatusIdByEmp(statusId,employeeId);
+			if(ticketList.size() == 0) {
+				throw new TicketNotFoundException("There is no ticket available for the status id: "+statusId, "400");
+			} else {
+				return ticketList;
+			}
+	}
+	
+
 }
