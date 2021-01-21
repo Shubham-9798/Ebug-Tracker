@@ -27,7 +27,7 @@ public class AdminController {
 	private IAdminService adminService;
 	
 	@PostMapping(path = "/registerEmployee")
-	ResponseEntity<Employee_Table> loginEmployee(@RequestBody Employee_Table employee) {
+	ResponseEntity<Employee_Table> registerEmployee(@RequestBody Employee_Table employee) {
 		Employee_Table response = adminService.registerEmployee(employee);
 		if(response == null) {
 

@@ -3,6 +3,8 @@ package com.Ebug.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.Ebug.entity.Ticket_Table;
 import com.Ebug.exception.EbugException;
 
 @Service
+@Transactional
 public class CustomerService implements ICustomerService {
 	@Autowired
 	private Customer_Repository customerRepository;
