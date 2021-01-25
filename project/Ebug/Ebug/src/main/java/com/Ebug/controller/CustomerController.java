@@ -2,7 +2,10 @@ package com.Ebug.controller;
 
 import java.util.List;
 
+
+import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Ebug.entity.Customer_Table;
 import com.Ebug.entity.Ticket_Table;
@@ -18,6 +26,7 @@ import com.Ebug.exception.UserAlreadyRegisterd;
 import com.Ebug.service.ICustomerService;
 
 @Controller
+@RequestMapping("/api") 
 public class CustomerController {
 	@Autowired
 	private ICustomerService customerService;
@@ -51,6 +60,7 @@ public class CustomerController {
 	    return new ResponseEntity<Ticket_Table>(customerService.createTicket(ticket), HttpStatus.OK);
 	}
 	
+	
 	@GetMapping("/ticketbystatusidbycus/{id}/{employeeId}")
 	ResponseEntity<List<Ticket_Table>> getTicketsByStatusIdByCus(@PathVariable("id") Long id, @PathVariable("employeeId") Long employeeId) {
 	    return new ResponseEntity<List<Ticket_Table>>(customerService.getTicketByStatusByCus(id,employeeId), HttpStatus.OK);
@@ -61,10 +71,6 @@ public class CustomerController {
 	    return new ResponseEntity<List<Ticket_Table>>(customerService.getTicketByCriticalLevelIdByCus(id,employeeId), HttpStatus.OK);
 	}
 	
-    @ExceptionHandler({ UserAlreadyRegisterd.class})
-    public ResponseEntity<UserAlreadyRegisterd> handleException(UserAlreadyRegisterd ex) {
-        //
-    	System.out.println("exception");
-    	return new ResponseEntity<UserAlreadyRegisterd>(ex, HttpStatus.OK);
-    }
+
+	
 }

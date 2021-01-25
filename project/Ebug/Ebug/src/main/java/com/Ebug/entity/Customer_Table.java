@@ -19,6 +19,8 @@ public class Customer_Table {
 	@Column
 	private String firstName;
 	@Column
+	private String userName;
+	@Column
 	private String lastName;
 	@Column
 	private String emailId;
@@ -110,11 +112,20 @@ public class Customer_Table {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Customer_Table(long custId, String firstName, String lastName, String emailId, long mobileNo,
-			String password, String confirmPassword, String adharCard, String dOB) {
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Customer_Table(long custId, String firstName, String userName, String lastName, String emailId,
+			long mobileNo, String password, String confirmPassword, String adharCard, String dOB) {
 		super();
 		this.custId = custId;
 		this.firstName = firstName;
+		this.userName = userName;
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
@@ -123,6 +134,8 @@ public class Customer_Table {
 		this.adharCard = adharCard;
 		DOB = dOB;
 	}
+
+
 
 
 

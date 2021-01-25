@@ -15,6 +15,8 @@ public class Admin_Table {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	@Column
+	private String userName;
+	@Column
 	private String firstName;
 	@Column
 	private String lastName;
@@ -30,7 +32,6 @@ public class Admin_Table {
 	private String adharCard;
 	
 	private String DOB;
-	
 	
 	
 	public String getAdharCard() {
@@ -89,10 +90,15 @@ public class Admin_Table {
 	}
 
 	
-	public Admin_Table(long id, String firstName, String lastName, String emailId, long mobileNo, String password,
-			String role, String adharCard, String dOB) {
+	public Admin_Table() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Admin_Table(long id, String userName, String firstName, String lastName, String emailId, long mobileNo,
+			String password, String role, String adharCard, String dOB) {
 		super();
 		this.id = id;
+		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
@@ -102,10 +108,13 @@ public class Admin_Table {
 		this.adharCard = adharCard;
 		DOB = dOB;
 	}
-	public Admin_Table() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getUserName() {
+		return userName;
 	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 	
 	
 	

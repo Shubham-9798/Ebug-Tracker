@@ -23,6 +23,9 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 	Optional<Ticket_Table> findTicketById(Long id);
 	
 	// employee
+	@Query(value = "Select * from TICKET_TABLE a where a.assigned_To_Employee=:assignedId", nativeQuery = true)
+	public List<Ticket_Table> FindAllTicketAssignedToEmp( @Param("assignedId") Long assignedId);
+	
 	@Query(value = "Select * from TICKET_TABLE a where a.status_id=:id AND a.assigned_To_Employee=:employeeId", nativeQuery = true)
 	public List<Ticket_Table> FindTicketByStatusIdByEmp( @Param("id") Long statusId, @Param("employeeId") Long employeeId);
 	
@@ -38,5 +41,8 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 
 	@Query(value = "Select * from TICKET_TABLE a where a.critical_id=:id AND a.cust_Id=:cusId", nativeQuery = true)
 	public List<Ticket_Table> FindTicketByCriticalLevelIdByCus( @Param("id") Long criticalId, @Param("cusId") Long cusId);
+	
+
+	
 	
 }

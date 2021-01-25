@@ -1,6 +1,7 @@
 package com.Ebug.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,7 @@ import com.Ebug.dao.CriticalLevel_Repository;
 import com.Ebug.dao.Employee_Repositroy;
 import com.Ebug.dao.Status_Repository;
 import com.Ebug.dao.Ticket_Repository;
+import com.Ebug.dto.TicketDtoForEmploye;
 import com.Ebug.entity.CriticalLevel_Table;
 import com.Ebug.entity.Employee_Table;
 import com.Ebug.entity.Status_Table;
@@ -83,14 +85,53 @@ public class EmployeeService implements IEmplyeeService {
 	}
 
 	@Override
-	public String sendSolutionToCustomer(String solution) {
-		
-		return null;
+	public Ticket_Table sendSolutionToCustomer(TicketDtoForEmploye ticketDto) {
+		try {
+			Optional<Ticket_Table> data = ticketRepository.findById(ticketDto.getTicketId());
+			if(data.isPresent())
+			{
+				Ticket_Table ticket = data.get();
+				ticket.setSolution(ticketDto.getSolution());
+				return ticketRepository.save(ticket);
+			}
+			else {
+				return null;
+			}
+		} catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
 	}
 
 	@Override
-	public String assignTaskToOtherEmployee(Long employeeId) {
+	public Ticket_Table assignTaskToOtherEmployee(TicketDtoForEmploye ticketDto) {
+		try {
+			Optional<Ticket_Table> data = ticketRepository.findById(ticketDto.getTicketId());
+			if(data.isPresent())
+			{
+				Ticket_Table ticket = data.get();
+				System.out.println("data");
+				ticket.setAssignedToEmployee(ticketDto.getAssignedId());
+				return ticketRepository.save(ticket);
+			}
+			else {
+				return null;
+			}
+		} catch(Exception ex) {
+			System.out.println(ex);
+			return null;
+		}
+//		return null;
+	}
+
+	@Override
+	public List<Ticket_Table> getAssignedTickets(Long cusId) {
+		List<Ticket_Table> ticketList = ticketRepository.FindAllTicketAssignedToEmp(cusId);
 		
-		return null;
+		if(ticketList.size() == 0) {
+			throw new TicketNotFoundException("There is no ticket available for the project id: ", "401");
+		} else {
+			return ticketList;
+		}
 	}
 }

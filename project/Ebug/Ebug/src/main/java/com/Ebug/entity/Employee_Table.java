@@ -17,6 +17,8 @@ public class Employee_Table {
 	@Column
 	private String firstName;
 	@Column
+	private String userName;
+	@Column
 	private String lastName;
 	@Column
 	private String emailId;
@@ -48,11 +50,13 @@ public class Employee_Table {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee_Table(long id, String firstName, String lastName, String emailId, long mobileNo, String password,
-			String role, String adharCard, String dOB) {
+	
+	public Employee_Table(long id, String firstName, String userName, String lastName, String emailId, long mobileNo,
+			String password, String role, String adharCard, String dOB) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
+		this.userName = userName;
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
@@ -103,6 +107,13 @@ public class Employee_Table {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 	
 	
 	

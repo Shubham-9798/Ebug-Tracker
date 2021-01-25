@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Ebug.entity.CriticalLevel_Table;
 import com.Ebug.entity.Customer_Table;
@@ -21,6 +22,7 @@ import com.Ebug.exception.UserAlreadyRegisterd;
 import com.Ebug.service.IAdminService;
 
 @Controller
+@RequestMapping("/api")
 public class AdminController {
 	
 	@Autowired

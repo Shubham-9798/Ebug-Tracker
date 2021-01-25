@@ -2,6 +2,8 @@ package com.Ebug.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.Ebug.entity.Customer_Table;
 import com.Ebug.entity.Ticket_Table;
 

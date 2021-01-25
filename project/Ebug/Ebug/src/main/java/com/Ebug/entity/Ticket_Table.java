@@ -33,6 +33,11 @@ public class Ticket_Table {
 	private String solution;
 	
 	private String fileName;
+
+	private String fileType;
+
+	@Column(name = "picByte", length = 1000)
+	private byte[] picByte;
 	
 	private Boolean isUpdatedByAdmin;
 	
@@ -41,6 +46,8 @@ public class Ticket_Table {
 	private Boolean isResolved;
 	
 	private Long assignedToEmployee;
+	
+	
 	
 	@Column
 	private long custId;
@@ -172,15 +179,34 @@ public class Ticket_Table {
 		this.assignedToEmployee = assignedToEmployee;
 	}
 
-	public Ticket_Table(Long id, String title, String comments, String solution, String fileName,
-			Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved, Long assignedToEmployee,
-			long custId, Status_Table statusTable, CriticalLevel_Table criticalLevel, Project_Table projectTable) {
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public byte[] getPicByte() {
+		return picByte;
+	}
+
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
+	}
+
+	public Ticket_Table(Long id, String title, String comments, String solution, String fileName, String fileType,
+			byte[] picByte, Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved,
+			Long assignedToEmployee, long custId, Status_Table statusTable, CriticalLevel_Table criticalLevel,
+			Project_Table projectTable) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.comments = comments;
 		this.solution = solution;
 		this.fileName = fileName;
+		this.fileType = fileType;
+		this.picByte = picByte;
 		this.isUpdatedByAdmin = isUpdatedByAdmin;
 		this.isVerifiedByAdmin = isVerifiedByAdmin;
 		this.isResolved = isResolved;
@@ -191,12 +217,7 @@ public class Ticket_Table {
 		this.projectTable = projectTable;
 	}
 
-	
-	
 
-
-	
-	 
 	 
 	 	
 }

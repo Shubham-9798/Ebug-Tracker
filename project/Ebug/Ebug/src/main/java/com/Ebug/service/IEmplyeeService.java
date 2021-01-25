@@ -2,6 +2,7 @@ package com.Ebug.service;
 
 import java.util.List;
 
+import com.Ebug.dto.TicketDtoForEmploye;
 import com.Ebug.entity.CriticalLevel_Table;
 import com.Ebug.entity.Employee_Table;
 import com.Ebug.entity.Status_Table;
@@ -20,8 +21,9 @@ public interface IEmplyeeService {
 	List<Ticket_Table> getTicketByCriticalLevelId(Long criticalId, Long employeeId);
 
 	List<Ticket_Table> getTicketByProjectId(Long projectId, Long employeeId);
+	List<Ticket_Table> getAssignedTickets(Long cusId);
 	
-	String sendSolutionToCustomer(String solution);
+	Ticket_Table sendSolutionToCustomer(TicketDtoForEmploye ticketDto);
 	
-	String assignTaskToOtherEmployee(Long employeeId);
+	Ticket_Table assignTaskToOtherEmployee(TicketDtoForEmploye ticketDto);
 }

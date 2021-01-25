@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.Ebug.dto.TicketDtoForEmploye;
 import com.Ebug.entity.CriticalLevel_Table;
 import com.Ebug.entity.Employee_Table;
 import com.Ebug.entity.Status_Table;
@@ -18,6 +21,7 @@ import com.Ebug.entity.Ticket_Table;
 import com.Ebug.service.IEmplyeeService;
 
 @Controller
+@RequestMapping("/api")
 public class EmployeeController {
 
 	@Autowired
@@ -36,6 +40,22 @@ public class EmployeeController {
 	@PostMapping("/loginEmployee")
 	ResponseEntity<Employee_Table> loginEmployee(@RequestBody Employee_Table employee) {
 	    return new ResponseEntity<Employee_Table>(employeeService.login(employee.getEmailId(), employee.getPassword()), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticket/{cusid}")
+	ResponseEntity<List<Ticket_Table>> getAssignedTickets(@PathVariable("cusid") Long cusid) {
+	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getAssignedTickets(cusid), HttpStatus.OK);
+	}
+	
+	@PutMapping("/assigntickettoOther")
+	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@RequestBody TicketDtoForEmploye ticketDto) {
+		System.out.println(ticketDto.toString());
+		return new ResponseEntity<Ticket_Table>(employeeService.assignTaskToOtherEmployee(ticketDto), HttpStatus.OK);
+	}
+	
+	@PutMapping("/sendSolution")
+	ResponseEntity<Ticket_Table> sendSolutionToCustomer(@RequestBody TicketDtoForEmploye ticketDto) {
+		return new ResponseEntity<Ticket_Table>(employeeService.sendSolutionToCustomer(ticketDto), HttpStatus.OK);
 	}
 	
 	@GetMapping("/ticketbystatusid/{id}/{employeeId}")
