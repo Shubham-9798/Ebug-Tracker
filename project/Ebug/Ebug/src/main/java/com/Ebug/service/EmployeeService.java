@@ -134,4 +134,10 @@ public class EmployeeService implements IEmplyeeService {
 			return ticketList;
 		}
 	}
+
+	@Override
+	public List<Employee_Table> getEmpList() {
+		// TODO Auto-generated method stub
+		return employeeRepository.findAll();
+	}
 }

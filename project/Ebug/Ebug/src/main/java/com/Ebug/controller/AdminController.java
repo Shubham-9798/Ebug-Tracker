@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.Ebug.dto.TicketDtoForEmploye;
 import com.Ebug.entity.CriticalLevel_Table;
 import com.Ebug.entity.Customer_Table;
 import com.Ebug.entity.Employee_Table;
@@ -41,6 +42,11 @@ public class AdminController {
 	@GetMapping("/tickets")
 	ResponseEntity<List<Ticket_Table>> getAllTickets() {
 	    return new ResponseEntity<List<Ticket_Table>>(adminService.getAllTickets(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/ticketsnotassign")
+	ResponseEntity<List<Ticket_Table>> getAllNotAssigendTickets() {
+	    return new ResponseEntity<List<Ticket_Table>>(adminService.getAllNotAssigendTickets(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/tickets/{ticketId}")
@@ -75,13 +81,11 @@ public class AdminController {
 	    return new ResponseEntity<Ticket_Table>(adminService.updateTicketByAdmin(ticket), HttpStatus.OK);
 	}
 	
-	@PostMapping("/assignticket/{ticketID}")
-	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @RequestBody Long employeeId) {
-	    System.out.println(ticketId);
-	    System.out.println(employeeId);
+	@PostMapping("/assignticket")
+	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@RequestBody TicketDtoForEmploye emp ) {
 	    
 //		return null;
-		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(ticketId, employeeId), HttpStatus.OK);
+		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(emp.getTicketId(), emp.getAssignedId()), HttpStatus.OK);
 	}
 	
 	
@@ -105,6 +109,8 @@ public class AdminController {
 	ResponseEntity<Project_Table> getProjectByID(@PathVariable("id") Long id) {
 	    return new ResponseEntity<Project_Table>(adminService.getProjectByID(id), HttpStatus.OK);
 	}
+
+
 	
 	
 }

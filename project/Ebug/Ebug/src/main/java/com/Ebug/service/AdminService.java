@@ -238,6 +238,12 @@ public class AdminService implements IAdminService{
 			return null;
 		}
 	}
+
+	@Override
+	public List<Ticket_Table> getAllNotAssigendTickets() {
+		// TODO Auto-generated method stub
+		return this.ticketRepository.FindAllNotTicketAssigned()	;
+	}
 	 
 	
 }

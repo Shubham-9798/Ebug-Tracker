@@ -26,4 +26,6 @@ public interface IEmplyeeService {
 	Ticket_Table sendSolutionToCustomer(TicketDtoForEmploye ticketDto);
 	
 	Ticket_Table assignTaskToOtherEmployee(TicketDtoForEmploye ticketDto);
+	
+	List<Employee_Table> getEmpList();
 }

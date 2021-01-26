@@ -12,6 +12,8 @@ import com.Ebug.entity.Ticket_Table;
 public interface IAdminService {
 
 	 List<Ticket_Table> getAllTickets();
+	 
+	 List<Ticket_Table> getAllNotAssigendTickets();
 	 Ticket_Table getTicketById(Long id);
 //	 Ticket_Table createTicket(Ticket_Table ticket);
 	 Ticket_Table updateTicketByAdmin(Ticket_Table ticket);

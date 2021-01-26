@@ -20,6 +20,9 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 	@Query(value = "Select * from TICKET_TABLE a where a.project_id=:id",  nativeQuery = true)
 	public List<Ticket_Table> FindTicketByProjectId( @Param("id") Long id);
 	
+	@Query(value = "Select * from TICKET_TABLE a where a.assigned_To_Employee is null", nativeQuery = true)
+	public List<Ticket_Table> FindAllNotTicketAssigned();
+	
 	Optional<Ticket_Table> findTicketById(Long id);
 	
 	// employee

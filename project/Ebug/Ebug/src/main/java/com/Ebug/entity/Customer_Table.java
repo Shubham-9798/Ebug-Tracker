@@ -15,7 +15,7 @@ public class Customer_Table {
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long custId;
+	private long userId;
 	@Column
 	private String firstName;
 	@Column
@@ -26,6 +26,7 @@ public class Customer_Table {
 	private String emailId;
 	@Column
 	private long mobileNo;
+	private String role;
 	@Column
 	private String password;
 	@Column
@@ -51,13 +52,6 @@ public class Customer_Table {
 		DOB = dOB;
 	}
 
-	public long getCustId() {
-		return custId;
-	}
-
-	public void setCustId(long custId) {
-		this.custId = custId;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -120,20 +114,39 @@ public class Customer_Table {
 		this.userName = userName;
 	}
 
-	public Customer_Table(long custId, String firstName, String userName, String lastName, String emailId,
-			long mobileNo, String password, String confirmPassword, String adharCard, String dOB) {
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
+	public Customer_Table(long userId, String firstName, String userName, String lastName, String emailId,
+			long mobileNo, String role, String password, String confirmPassword, String adharCard, String dOB) {
 		super();
-		this.custId = custId;
+		this.userId = userId;
 		this.firstName = firstName;
 		this.userName = userName;
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
+		this.role = role;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.adharCard = adharCard;
 		DOB = dOB;
 	}
+
+
 
 
 

@@ -42,9 +42,9 @@ public class EmployeeController {
 	    return new ResponseEntity<Employee_Table>(employeeService.login(employee.getEmailId(), employee.getPassword()), HttpStatus.OK);
 	}
 	
-	@GetMapping("/ticket/{cusid}")
-	ResponseEntity<List<Ticket_Table>> getAssignedTickets(@PathVariable("cusid") Long cusid) {
-	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getAssignedTickets(cusid), HttpStatus.OK);
+	@GetMapping("/ticket/{empid}")
+	ResponseEntity<List<Ticket_Table>> getAssignedTickets(@PathVariable("empid") Long empid) {
+	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getAssignedTickets(empid), HttpStatus.OK);
 	}
 	
 	@PutMapping("/assigntickettoOther")
@@ -71,5 +71,10 @@ public class EmployeeController {
 	@GetMapping("/ticketbyprojectid/{id}/{employeeId}")
 	ResponseEntity<List<Ticket_Table>> getTicketsByProjectId(@PathVariable("id") Long id,@PathVariable("employeeId") Long employeeId) {
 	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getTicketByProjectId(id,employeeId), HttpStatus.OK);
+	}
+	
+	@GetMapping("/getemplist")
+	ResponseEntity<List<Employee_Table>> getEmpList() {
+	    return new ResponseEntity<List<Employee_Table>>(this.employeeService.getEmpList(), HttpStatus.OK);
 	}
 }

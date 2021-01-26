@@ -4,6 +4,7 @@ public class TicketDtoForEmploye {
 	private Long ticketId;
 	private String solution;
 	private Long assignedId;
+	
 	@Override
 	public String toString() {
 		return "TicketDtoForEmploye [ticketId=" + ticketId + ", solution=" + solution + ", assignedId=" + assignedId
